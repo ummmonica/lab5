@@ -1,0 +1,18 @@
+<%- include("partials/header.ejs") %>
+
+<body>
+    <h1> Quote Finder </h1>
+    <!-- 'searchByKeyword' value of the action -->
+     <!-- when user click button, page will try to access route 'searchByKeyword' -->
+      <!-- submits data from browser to Express -->
+    <form action = "/searchByKeyword">
+        Keyword:
+        <!-- name attribute NEEDED to send user-entered value to Express server -->
+        <input type = "text" name = "keyword">
+        <button>Search by Keyword</button>
+    </form>
+
+    <form method = "GET" action = "/searchByKeyword">
+
+    <%- include("partials/footer.ejs") %>
+</body>
