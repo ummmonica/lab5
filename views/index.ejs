@@ -12,7 +12,24 @@
         <button>Search by Keyword</button>
     </form>
 
-    <form method = "GET" action = "/searchByKeyword">
+    <!-- <form method = "GET" action = "/searchByKeyword"> -->
+
+    <br>
+
+    <!-- lists authors instead of hardcoding -->
+    <form action = "/searchByAuthor">
+        <select name = "authorId">
+            <option value = "1">
+                Albert Einstein
+            </option>
+            
+            <option value = "2">
+                Agatha Christie
+            </option>
+        </select>
+
+        <button>Search by Author</button>
+    </form>
 
     <%- include("partials/footer.ejs") %>
 </body>

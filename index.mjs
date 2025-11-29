@@ -35,16 +35,30 @@ app.get("/dbTest", async(req, res) => {
     }
 });//dbTest
 
-// index.ejs route for searching by keyword
+// searching by keyword
 app.get('/searchByKeyword', async (req, res) => {
-    let userKeyword = req.query.keyword;
+    let keyword = req.query.keyword;
     let sql = 
         `SELECT authorId, firstName, lastName, quote
         FROM q_quotes
         NATURAL JOIN q_authors
-        WHERE quote LIKE '%${userKeyword}%'`;
-    const [rows] = await pool.query(sql);
-    res.send(rows);
+        WHERE quote LIKE ?`;
+    let sqlParams = [`%${keyword}%`];
+    const [rows] = await pool.query(sql, sqlParams);
+    res.render("results", {"quotes":rows});
+});
+
+// searching by author
+app.get('/searchByAuthor', async (req, res) => {
+    let authorId = req.query.authorId;
+    let sql = 
+        `SELECT authorId, firstName, lastName, quote
+        FROM q_quotes
+        NATURAL JOIN q_authors
+        WHERE authorId = ?`;
+    let sqlParams = [authorId];
+    const [rows] = await pool.query(sql, sqlParams);
+    res.render("results", {"quotes":rows});
 });
 
 app.listen(3000, ()=>{
