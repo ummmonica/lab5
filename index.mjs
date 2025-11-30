@@ -20,8 +20,14 @@ const pool = mysql.createPool({
 });
 
 //routes
-app.get('/', (req, res) => {
-   res.render('index')
+app.get('/', async (req, res) => {
+    // searching by author (pulled from database)
+    let sql = `
+        SELECT authorId, firstName, lastName
+        FROM q_authors
+        ORDER BY lastName`;
+    const [rows] = await pool.query(sql);
+    res.render("index",{"authors":rows});
 });
 
 // just for testing connection in the beginning
@@ -59,6 +65,17 @@ app.get('/searchByAuthor', async (req, res) => {
     let sqlParams = [authorId];
     const [rows] = await pool.query(sql, sqlParams);
     res.render("results", {"quotes":rows});
+});
+
+// route to get author info once name is clicked
+app.get('/api/author/:id', async (req, res) => {
+    let authorId = req.params.id;
+    let sql = `
+        SELECT *
+        FROM q_authors 
+        WHERE authorId = ?`;
+    const [rows] = await pool.query(sql, [authorId]);
+    res.send(rows);
 });
 
 app.listen(3000, ()=>{

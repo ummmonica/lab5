@@ -3,14 +3,45 @@
 <body>
     <h1>Quotes Found</h1>
 
-    <!-- Display Quotes in a  view -->
     <% for (i of quotes) { %>
         <%= i.quote %> <br>
-        -<em><%= i.firstName %> <%= i.lastName %></em>
+        <!-- Display Quotes in a view -->
+        -<em>
+            <!-- makes names clickable link -->
+             <a href = "#" id = "<%= i.authorId %>" >
+                <%= i.firstName %> <%= i.lastName %>
+             </a>
+        </em>
+
         <br><br>
     <% } %>
 
+    <!-- place holder for author's info to display on web -->
+    <div id = "authorInfo"></div>
+
+    <!-- Button trigger modal -->
+    <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Launch demo modal
+    </button> -->
+
+    <!-- Modal. Launches using JS -->
+    <div class="modal fade" id="authorModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Author Information</h1>
+                </div>
+                <div class="modal-body">
+                    <div id = "authorInfo"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 <%- include("partials/footer.ejs") %>    
+
+    <!-- embed the scripts.js -->
+    <script src = "/js/scripts.js"></script>
 </body>
 
 </html>
