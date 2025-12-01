@@ -12,8 +12,6 @@
         <button>Search by Keyword</button>
     </form>
 
-    <!-- <form method = "GET" action = "/searchByKeyword"> -->
-
     <br>
 
     <!-- lists authors by database -->
@@ -23,11 +21,12 @@
             <option value = "<%= author.authorId %>">
                 <%= author.firstName %> <%= author.lastName %>
             </option>
-        <% } %>
+            <% } %>
         </select>
 
         <button>Search by Author</button>
      </form>
 
     <%- include("partials/footer.ejs") %>
+
 </body>

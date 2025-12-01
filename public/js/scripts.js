@@ -1,5 +1,3 @@
-// alert("Script file successfully accessed!");
-
 // "click" event listeners for all 'a' elements
 let authorLinks = document.querySelectorAll("a");
 
@@ -22,7 +20,7 @@ async function getAuthorInfo() {
 
     // formats information from database to display all author's info
     authorInfo.innerHTML = `<h1> ${data[0].firstName}
-                                 ${data[0].lastName} ( ${data[0].sex} ) <br>
+                                 ${data[0].lastName} (${data[0].sex}) <br>
                             </h1>
                             
                             <strong> Profession: </strong> ${data[0].profession} <br>

@@ -44,8 +44,8 @@ app.get("/dbTest", async(req, res) => {
 // searching by keyword
 app.get('/searchByKeyword', async (req, res) => {
     let keyword = req.query.keyword;
-    let sql = 
-        `SELECT authorId, firstName, lastName, quote
+    let sql = `
+        SELECT authorId, firstName, lastName, quote
         FROM q_quotes
         NATURAL JOIN q_authors
         WHERE quote LIKE ?`;
@@ -57,8 +57,8 @@ app.get('/searchByKeyword', async (req, res) => {
 // searching by author
 app.get('/searchByAuthor', async (req, res) => {
     let authorId = req.query.authorId;
-    let sql = 
-        `SELECT authorId, firstName, lastName, quote
+    let sql = `
+        SELECT authorId, firstName, lastName, quote
         FROM q_quotes
         NATURAL JOIN q_authors
         WHERE authorId = ?`;
@@ -75,7 +75,7 @@ app.get('/api/author/:id', async (req, res) => {
         FROM q_authors 
         WHERE authorId = ?`;
     const [rows] = await pool.query(sql, [authorId]);
-    res.send(rows);
+    res.json(rows);
 });
 
 app.listen(3000, ()=>{
