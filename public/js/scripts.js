@@ -23,7 +23,9 @@ async function getAuthorInfo() {
     console.log("author info element: ", authorInfo);
 
     // formats information from database to display all author's info    
-    authorInfo.innerHTML = `<h1> ${data[0].firstName}
+    authorInfo.innerHTML = `<img src = " ${data[0].portrait}" width = "200"> <br>
+    
+                            <h1> ${data[0].firstName}
                                  ${data[0].lastName} (${data[0].sex}) <br>
                             </h1>
                             
@@ -33,5 +35,4 @@ async function getAuthorInfo() {
                             <strong> Country: </strong> ${data[0].country} <br>
                             <strong> Biography: </strong> ${data[0].biography} <br>
                             `;
-   authorInfo.innerHTML += `<img src = " ${data[0].portrait}" width = "200"> <br>`;
 }
