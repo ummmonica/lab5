@@ -19,15 +19,27 @@ const pool = mysql.createPool({
     waitForConnections: true
 });
 
-//routes
+//routes !!!!
 app.get('/', async (req, res) => {
+
     // searching by author (pulled from database)
-    let sql = `
+    let authorsSql = `
         SELECT authorId, firstName, lastName
         FROM q_authors
         ORDER BY lastName`;
-    const [rows] = await pool.query(sql);
-    res.render("index",{"authors":rows});
+    const [authors] = await pool.query(authorsSql);
+
+    // showing categories
+    let categoriesSql = `
+        SELECT DISTINCT category
+        FROM q_quotes
+        ORDER BY category`;
+    const [categories] = await pool.query(categoriesSql);
+
+    res.render("index",{
+        authors: authors,
+        categories: categories
+    });
 });
 
 // just for testing connection in the beginning
@@ -39,7 +51,7 @@ app.get("/dbTest", async(req, res) => {
         console.error("Database error:", err);
         res.status(500).send("Database error");
     }
-});//dbTest
+});
 
 // searching by keyword
 app.get('/searchByKeyword', async (req, res) => {
@@ -77,6 +89,23 @@ app.get('/api/author/:id', async (req, res) => {
     const [rows] = await pool.query(sql, [authorId]);
     res.json(rows);
 });
+
+// launch results based on category (alphabetical order)
+app.get('/searchByCategory', async (req, res) => {
+    let category = req.query.category;
+    let sql = `
+        SELECT authorId, firstName, lastName, quote, category
+        FROM q_quotes
+        NATURAL JOIN q_authors
+        WHERE category = ?
+        ORDER BY quote`;
+    let sqlParams = [category];
+    const [rows] = await pool.query(sql, sqlParams);
+    res.render("results", {"quotes":rows});
+});
+
+// route to search by likes
+
 
 app.listen(3000, ()=>{
     console.log("Express server running");

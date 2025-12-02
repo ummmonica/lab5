@@ -15,7 +15,7 @@
     <br>
 
     <!-- lists authors by database -->
-     <form action = "/searchByAuthor">
+    <form action = "/searchByAuthor">
         <select name = "authorId">
             <% for (author of authors) { %>
             <option value = "<%= author.authorId %>">
@@ -25,7 +25,21 @@
         </select>
 
         <button>Search by Author</button>
-     </form>
+    </form>
+
+    <!-- to search by category -->
+    <form action = "/searchByCategory">
+        <select name = "category">
+            <% for (category of categories) { %>
+            <option value = "<%= category.category %>">
+                <%= category.category %>
+            </option>
+            <% } %>
+        </select>
+
+        <button>Search by Category</button>
+    </form>
+
 
     <%- include("partials/footer.ejs") %>
 
