@@ -1,4 +1,3 @@
-/* General Styles */
 * {
     margin: 0;
     padding: 0;
@@ -13,13 +12,13 @@ body {
     color: #333;
 }
 
-/* Main Container */
+/* main */
 .container {
     max-width: 1200px;
     margin: 0 auto;
 }
 
-/* Header Styles */
+/* for header */
 h1 {
     text-align: center;
     color: white;
@@ -37,7 +36,7 @@ h3 {
     text-align: center;
 }
 
-/* ADDED: Center all forms */
+/* to center forms */
 form {
     background-color: white;
     padding: 25px;
@@ -53,7 +52,7 @@ form:hover {
     box-shadow: 0 12px 20px rgba(0, 0, 0, 0.25);
 }
 
-/* ADDED: Container for side-by-side forms */
+/* Container for side-by-side forms */
 .forms-row {
     display: flex;
     gap: 20px;
@@ -67,7 +66,7 @@ form:hover {
     margin-bottom: 0;
 }
 
-/* Input Styles */
+/* Input styles */
 input[type="text"],
 input[type="number"] {
     padding: 12px 15px;
@@ -124,6 +123,7 @@ button {
     margin-top: 10px;
 }
 
+/* for when hovering */
 button:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
@@ -133,7 +133,7 @@ button:active {
     transform: translateY(0);
 }
 
-/* Results Page Styles */
+/* results style */
 .results-container {
     background-color: white;
     padding: 30px;
@@ -149,7 +149,7 @@ button:active {
     text-align: center;
 }
 
-/* Quote Card Styles */
+/* quote card */
 .quote-card {
     background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
     padding: 25px;
@@ -272,7 +272,6 @@ a:hover {
     background-color: #5a6268;
 }
 
-/* Author Info Styles */
 #authorInfo {
     color: #333;
     text-align: left;
@@ -288,7 +287,6 @@ a:hover {
     line-height: 2;
 }
 
-/* Header and Footer */
 header {
     background: rgba(255, 255, 255, 0.95);
     color: #2c3e50;
@@ -314,65 +312,10 @@ footer p {
     font-size: 0.9em;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    body {
-        padding: 10px;
-    }
-    
-    h1 {
-        font-size: 2em;
-    }
-    
-    /* ADDED: Stack forms vertically on mobile */
-    .forms-row {
-        flex-direction: column;
-    }
-    
-    .forms-row form {
-        max-width: 100%;
-    }
-    
-    form {
-        padding: 20px;
-    }
-    
-    input[type="text"],
-    input[type="number"],
-    select {
-        width: 100%;
-        max-width: 100%;
-        margin-right: 0;
-        margin-bottom: 15px;
-    }
-    
-    button {
-        width: 100%;
-        margin-top: 10px;
-    }
-    
-    .modal-body {
-        padding: 20px;
-    }
-}
-
-/* Loading Animation */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
 .quote-card {
     animation: fadeIn 0.5s ease;
 }
 
-/* Small Label Text */
 small {
     display: inline-block;
     padding: 4px 8px;
