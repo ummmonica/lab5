@@ -42,16 +42,16 @@ app.get('/', async (req, res) => {
     });
 });
 
-// just for testing connection in the beginning
-app.get("/dbTest", async(req, res) => {
-   try {
-        const [rows] = await pool.query("SELECT CURDATE()");
-        res.send(rows);
-    } catch (err) {
-        console.error("Database error:", err);
-        res.status(500).send("Database error");
-    }
-});
+// // just for testing connection in the beginning
+// app.get("/dbTest", async(req, res) => {
+//    try {
+//         const [rows] = await pool.query("SELECT CURDATE()");
+//         res.send(rows);
+//     } catch (err) {
+//         console.error("Database error:", err);
+//         res.status(500).send("Database error");
+//     }
+// });
 
 // searching by keyword
 app.get('/searchByKeyword', async (req, res) => {
@@ -86,6 +86,8 @@ app.get('/api/author/:id', async (req, res) => {
         SELECT *
         FROM q_authors 
         WHERE authorId = ?`;
+    
+    // this section allows for display of results
     const [rows] = await pool.query(sql, [authorId]);
     res.json(rows);
 });
@@ -99,6 +101,8 @@ app.get('/searchByCategory', async (req, res) => {
         NATURAL JOIN q_authors
         WHERE category = ?
         ORDER BY quote`;
+
+    // this section allows for display of results
     let sqlParams = [category];
     const [rows] = await pool.query(sql, sqlParams);
     res.render("results", {"quotes":rows});
@@ -109,10 +113,17 @@ app.get ('/searchByLikes', async (req, res) => {
     let minLikes = req.query.minLikes;
     let maxLikes = req.query.maxLikes;
     let sql = `
-        SELECT quote, firstName, lastName
-        FROM q_quotes JOIN q_authors
-        WHERE minLikes >= ? and maxLikes <= ?`;
-})
+        SELECT quote, firstName, lastName, likes
+        FROM q_authors 
+        INNER JOIN q_quotes on q_authors.authorId = q_quotes.authorId
+        WHERE likes BETWEEN ? and ?
+        ORDER BY likes DESC`;
+
+    // this section allows for display of results
+    let sqlParams = [minLikes, maxLikes];
+    const [rows] = await pool.query(sql, sqlParams);
+    res.render("results", {"quotes":rows});
+});
 
 
 app.listen(3000, ()=>{
