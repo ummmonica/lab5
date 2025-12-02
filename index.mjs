@@ -105,6 +105,14 @@ app.get('/searchByCategory', async (req, res) => {
 });
 
 // route to search by likes
+app.get ('/searchByLikes', async (req, res) => {
+    let minLikes = req.query.minLikes;
+    let maxLikes = req.query.maxLikes;
+    let sql = `
+        SELECT quote, firstName, lastName
+        FROM q_quotes JOIN q_authors
+        WHERE minLikes >= ? and maxLikes <= ?`;
+})
 
 
 app.listen(3000, ()=>{
